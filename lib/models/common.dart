@@ -382,7 +382,7 @@ extension ColorSchemesExt on ColorSchemes {
             );
     }
     return lightColorScheme != null
-        ? ColorScheme.fromSeed(seedColor: lightColorScheme!.primary)
+        ? ColorScheme.fromSeed(seedColor: lightColorScheme!.primary,dynamicSchemeVariant: DynamicSchemeVariant.vibrant)
         : ColorScheme.fromSeed(seedColor: defaultPrimaryColor);
   }
 }
