@@ -273,7 +273,7 @@ class _CommonEdgeShadowPainter extends BoxPainter {
       return;
     }
 
-    final double shadowWidth = 0.03 * configuration.size!.width;
+    final double shadowWidth = 1 * configuration.size!.width;
     final double shadowHeight = configuration.size!.height;
     final double bandWidth = shadowWidth / (colors.length - 1);
 
