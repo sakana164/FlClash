@@ -148,7 +148,7 @@ VpnState vpnState(Ref ref) {
 HomeState homeState(Ref ref) {
   final pageLabel = ref.watch(currentPageLabelProvider);
   final navigationItems = ref.watch(currentNavigationsStateProvider).value;
-  final viewMode = ref.watch(viewWidthProvider.notifier).viewMode;
+  final viewMode = ref.watch(viewModeProvider);
   final locale = ref.watch(appSettingProvider).locale;
   return HomeState(
     pageLabel: pageLabel,
@@ -295,7 +295,7 @@ PackageListSelectorState packageListSelectorState(Ref ref) {
 
 @riverpod
 MoreToolsSelectorState moreToolsSelectorState(Ref ref) {
-  final viewMode = ref.watch(viewWidthProvider.notifier).viewMode;
+  final viewMode = ref.watch(viewModeProvider);
   final navigationItems = ref.watch(navigationsStateProvider.select((state) {
     return state.value.where((element) {
       final isMore = element.modes.contains(NavigationItemMode.more);
@@ -322,7 +322,7 @@ bool isCurrentPage(
     return true;
   }
   if (handler != null) {
-    final viewMode = ref.watch(viewWidthProvider.notifier).viewMode;
+    final viewMode = ref.watch(viewModeProvider);
     return handler(currentPageLabel, viewMode);
   }
   return false;

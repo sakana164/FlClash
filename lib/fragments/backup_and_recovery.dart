@@ -6,6 +6,7 @@ import 'package:fl_clash/enum/enum.dart';
 import 'package:fl_clash/models/models.dart';
 import 'package:fl_clash/providers/config.dart';
 import 'package:fl_clash/state.dart';
+import 'package:fl_clash/widgets/dialog.dart';
 import 'package:fl_clash/widgets/fade_box.dart';
 import 'package:fl_clash/widgets/list.dart';
 import 'package:fl_clash/widgets/text.dart';
@@ -275,13 +276,13 @@ class _RecoveryOptionsDialogState extends State<RecoveryOptionsDialog> {
 
   @override
   Widget build(BuildContext context) {
-    return AlertDialog(
-      title: Text(appLocalizations.recovery),
-      contentPadding: const EdgeInsets.symmetric(
+    return CommonDialog(
+      title: appLocalizations.recovery,
+      padding: const EdgeInsets.symmetric(
         horizontal: 8,
         vertical: 16,
       ),
-      content: SizedBox(
+      child: SizedBox(
         width: 250,
         child: Wrap(
           children: [
@@ -351,9 +352,20 @@ class _WebDAVFormDialogState extends ConsumerState<WebDAVFormDialog> {
 
   @override
   Widget build(BuildContext context) {
-    return AlertDialog(
-      title: Text(appLocalizations.webDAVConfiguration),
-      content: Form(
+    return CommonDialog(
+      title: appLocalizations.webDAVConfiguration,
+      actions: [
+        if (widget.dav != null)
+          TextButton(
+            onPressed: _delete,
+            child: Text(appLocalizations.delete),
+          ),
+        TextButton(
+          onPressed: _submit,
+          child: Text(appLocalizations.save),
+        )
+      ],
+      child: Form(
         key: _formKey,
         child: SizedBox(
           width: dialogCommonWidth,
@@ -423,17 +435,6 @@ class _WebDAVFormDialogState extends ConsumerState<WebDAVFormDialog> {
           ),
         ),
       ),
-      actions: [
-        if (widget.dav != null)
-          TextButton(
-            onPressed: _delete,
-            child: Text(appLocalizations.delete),
-          ),
-        TextButton(
-          onPressed: _submit,
-          child: Text(appLocalizations.save),
-        )
-      ],
     );
   }
 }

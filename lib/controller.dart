@@ -10,6 +10,7 @@ import 'package:fl_clash/common/archive.dart';
 import 'package:fl_clash/enum/enum.dart';
 import 'package:fl_clash/providers/providers.dart';
 import 'package:fl_clash/state.dart';
+import 'package:fl_clash/widgets/dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:path/path.dart';
@@ -531,8 +532,7 @@ class AppController {
     _ref.read(currentPageLabelProvider.notifier).value =
         navigations[index].label;
     final isAnimateToPage = _ref.read(appSettingProvider).isAnimateToPage;
-    final isMobile =
-        _ref.read(viewWidthProvider.notifier).viewMode == ViewMode.mobile;
+    final isMobile = _ref.read(isMobileViewProvider);
     if (isAnimateToPage && isMobile || hasAnimate) {
       globalState.pageController?.animateToPage(
         index,
@@ -587,17 +587,8 @@ class AppController {
   Future<bool> showDisclaimer() async {
     return await globalState.showCommonDialog<bool>(
           dismissible: false,
-          child: AlertDialog(
-            title: Text(appLocalizations.disclaimer),
-            content: Container(
-              width: dialogCommonWidth,
-              constraints: const BoxConstraints(maxHeight: 200),
-              child: SingleChildScrollView(
-                child: SelectableText(
-                  appLocalizations.disclaimerDesc,
-                ),
-              ),
-            ),
+          child: CommonDialog(
+            title: appLocalizations.disclaimer,
             actions: [
               TextButton(
                 onPressed: () {
@@ -615,6 +606,9 @@ class AppController {
                 child: Text(appLocalizations.agree),
               )
             ],
+            child: SelectableText(
+              appLocalizations.disclaimerDesc,
+            ),
           ),
         ) ??
         false;
@@ -680,9 +674,9 @@ class AppController {
     addProfileFormURL(url);
   }
 
-  updateViewWidth(double width) {
+  updateViewSize(Size size) {
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      _ref.read(viewWidthProvider.notifier).value = width;
+      _ref.read(viewSizeProvider.notifier).value = size;
     });
   }
 

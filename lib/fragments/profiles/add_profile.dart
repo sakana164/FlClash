@@ -90,9 +90,15 @@ class _URLFormDialogState extends State<URLFormDialog> {
 
   @override
   Widget build(BuildContext context) {
-    return AlertDialog(
-      title: Text(appLocalizations.importFromURL),
-      content: SizedBox(
+    return CommonDialog(
+      title: appLocalizations.importFromURL,
+      actions: [
+        TextButton(
+          onPressed: _handleAddProfileFormURL,
+          child: Text(appLocalizations.submit),
+        )
+      ],
+      child: SizedBox(
         width: 300,
         child: Wrap(
           runSpacing: 16,
@@ -109,12 +115,6 @@ class _URLFormDialogState extends State<URLFormDialog> {
           ],
         ),
       ),
-      actions: [
-        TextButton(
-          onPressed: _handleAddProfileFormURL,
-          child: Text(appLocalizations.submit),
-        )
-      ],
     );
   }
 }

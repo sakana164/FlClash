@@ -2,6 +2,7 @@ import 'package:fl_clash/common/app_localizations.dart';
 import 'package:fl_clash/common/constant.dart';
 import 'package:fl_clash/models/common.dart';
 import 'package:fl_clash/state.dart';
+import 'package:fl_clash/widgets/dialog.dart';
 import 'package:fl_clash/widgets/null_status.dart';
 import 'package:flutter/material.dart';
 
@@ -25,13 +26,13 @@ class OptionsDialog<T> extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AlertDialog(
-      title: Text(title),
-      contentPadding: const EdgeInsets.symmetric(
+    return CommonDialog(
+      title: title,
+      padding: const EdgeInsets.symmetric(
         horizontal: 8,
         vertical: 16,
       ),
-      content: SizedBox(
+      child: SizedBox(
         width: 250,
         child: Wrap(
           children: [
@@ -104,9 +105,25 @@ class _InputDialogState extends State<InputDialog> {
 
   @override
   Widget build(BuildContext context) {
-    return AlertDialog(
-      title: Text(title),
-      content: SizedBox(
+    return CommonDialog(
+      title: title,
+      actions: [
+        if (widget.resetValue != null &&
+            textController.value.text != widget.resetValue) ...[
+          TextButton(
+            onPressed: _handleReset,
+            child: Text(appLocalizations.reset),
+          ),
+          const SizedBox(
+            width: 4,
+          ),
+        ],
+        TextButton(
+          onPressed: _handleUpdate,
+          child: Text(appLocalizations.submit),
+        )
+      ],
+      child: SizedBox(
         width: 300,
         child: Wrap(
           runSpacing: 16,
@@ -126,22 +143,6 @@ class _InputDialogState extends State<InputDialog> {
           ],
         ),
       ),
-      actions: [
-        if (widget.resetValue != null &&
-            textController.value.text != widget.resetValue) ...[
-          TextButton(
-            onPressed: _handleReset,
-            child: Text(appLocalizations.reset),
-          ),
-          const SizedBox(
-            width: 4,
-          ),
-        ],
-        TextButton(
-          onPressed: _handleUpdate,
-          child: Text(appLocalizations.submit),
-        )
-      ],
     );
   }
 }
@@ -492,9 +493,15 @@ class _AddDialogState extends State<AddDialog> {
 
   @override
   Widget build(BuildContext context) {
-    return AlertDialog(
-      title: Text(widget.title),
-      content: Form(
+    return CommonDialog(
+      title: widget.title,
+      actions: [
+        TextButton(
+          onPressed: _submit,
+          child: Text(appLocalizations.confirm),
+        )
+      ],
+      child: Form(
         key: _formKey,
         child: SizedBox(
           width: dialogCommonWidth,
@@ -542,12 +549,6 @@ class _AddDialogState extends State<AddDialog> {
           ),
         ),
       ),
-      actions: [
-        TextButton(
-          onPressed: _submit,
-          child: Text(appLocalizations.confirm),
-        )
-      ],
     );
   }
 }

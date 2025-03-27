@@ -27,3 +27,4 @@ export 'donut_chart.dart';
 export 'activate_box.dart';
 export 'wave.dart';
 export 'scroll.dart';
+export 'dialog.dart';

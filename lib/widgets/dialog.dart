@@ -1,0 +1,45 @@
+import 'dart:math';
+
+import 'package:fl_clash/providers/app.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+class CommonDialog extends ConsumerWidget {
+  final String title;
+  final Widget? child;
+  final List<Widget>? actions;
+  final EdgeInsets? padding;
+
+  const CommonDialog({
+    super.key,
+    required this.title,
+    this.actions,
+    this.child,
+    this.padding,
+  });
+
+  @override
+  Widget build(BuildContext context, ref) {
+    final size = ref.watch(viewSizeProvider);
+    return AlertDialog(
+      title: Text(title),
+      actions: actions,
+      contentPadding: padding,
+      content: Container(
+        constraints: BoxConstraints(
+          maxHeight: min(
+            size.height,
+            400,
+          ),
+          maxWidth: min(
+            size.width,
+            300,
+          ),
+        ),
+        child: SingleChildScrollView(
+          child: child,
+        ),
+      ),
+    );
+  }
+}

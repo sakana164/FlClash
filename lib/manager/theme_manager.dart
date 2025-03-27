@@ -17,8 +17,11 @@ class ThemeManager extends StatelessWidget {
     globalState.theme = CommonTheme.of(context);
     return LayoutBuilder(
       builder: (_, container) {
-        globalState.appController.updateViewWidth(
-          container.maxWidth,
+        globalState.appController.updateViewSize(
+          Size(
+            container.maxWidth,
+            container.maxHeight,
+          ),
         );
         return child;
       },

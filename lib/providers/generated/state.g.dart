@@ -143,7 +143,7 @@ final vpnStateProvider = AutoDisposeProvider<VpnState>.internal(
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 typedef VpnStateRef = AutoDisposeProviderRef<VpnState>;
-String _$homeStateHash() => r'4c8a996c43a705f6d089a727563c20ff87e13a97';
+String _$homeStateHash() => r'2829f5d6a8548f8a97253a5437bf5c498b17c9ba';
 
 /// See also [homeState].
 @ProviderFor(homeState)
@@ -469,7 +469,7 @@ final packageListSelectorStateProvider =
 typedef PackageListSelectorStateRef
     = AutoDisposeProviderRef<PackageListSelectorState>;
 String _$moreToolsSelectorStateHash() =>
-    r'82837b45198a75af9a9ce49b9c3ef97c6f8e9f87';
+    r'd27e3eceec2422ad6b6231cf52b892e63c67e365';
 
 /// See also [moreToolsSelectorState].
 @ProviderFor(moreToolsSelectorState)
@@ -488,7 +488,7 @@ final moreToolsSelectorStateProvider =
 // ignore: unused_element
 typedef MoreToolsSelectorStateRef
     = AutoDisposeProviderRef<MoreToolsSelectorState>;
-String _$isCurrentPageHash() => r'562702367f009c7b324395ab0a2ad3464784be8c';
+String _$isCurrentPageHash() => r'7c300770aef90da23109d9fcfc3bf26140d8cd08';
 
 /// See also [isCurrentPage].
 @ProviderFor(isCurrentPage)

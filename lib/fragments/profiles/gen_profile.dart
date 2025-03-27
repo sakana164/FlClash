@@ -2,8 +2,8 @@ import 'dart:ui';
 
 import 'package:fl_clash/clash/core.dart';
 import 'package:fl_clash/common/common.dart';
-import 'package:fl_clash/enum/enum.dart';
 import 'package:fl_clash/models/models.dart';
+import 'package:fl_clash/state.dart';
 import 'package:fl_clash/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 
@@ -126,6 +126,19 @@ class _GenProfileState extends State<GenProfile> {
                   padding: EdgeInsets.symmetric(horizontal: 16),
                   child: ListHeader(
                     title: '规则',
+                    actions: [
+                      IconButton.filledTonal(
+                        icon: Icon(Icons.add),
+                        onPressed: () {
+                          globalState.showCommonDialog(
+                            child: AddRuleDialog(),
+                          );
+                        },
+                        iconSize: 16,
+                        padding: EdgeInsets.all(4),
+                        visualDensity: VisualDensity.compact,
+                      )
+                    ],
                   ),
                 ),
               ),
@@ -134,20 +147,6 @@ class _GenProfileState extends State<GenProfile> {
                 sliver: SliverReorderableList(
                   itemBuilder: (context, index) {
                     final rule = clashConfig.rule[index];
-                    final isFirst = rule == clashConfig.rule.first;
-                    final isLast = rule == clashConfig.rule.last;
-                    BorderRadius borderRadius = BorderRadius.zero;
-                    if (isFirst) {
-                      borderRadius = BorderRadius.only(
-                        topLeft: Radius.circular(14),
-                        topRight: Radius.circular(14),
-                      );
-                    } else if (isLast) {
-                      borderRadius = BorderRadius.only(
-                        bottomRight: Radius.circular(14),
-                        bottomLeft: Radius.circular(14),
-                      );
-                    }
                     return Material(
                       color: Colors.transparent,
                       key: ObjectKey(rule),
@@ -202,6 +201,17 @@ class _GenProfileState extends State<GenProfile> {
           );
         },
       ),
+    );
+  }
+}
+
+class AddRuleDialog extends StatelessWidget {
+  const AddRuleDialog({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return CommonDialog(
+      title: "添加规则",
     );
   }
 }

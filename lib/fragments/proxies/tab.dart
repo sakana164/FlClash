@@ -49,7 +49,7 @@ class ProxiesTabFragmentState extends ConsumerState<ProxiesTabFragment>
   _buildMoreButton() {
     return Consumer(
       builder: (_, ref, ___) {
-        final isMobileView = ref.watch(viewWidthProvider.notifier).isMobileView;
+        final isMobileView = ref.watch(isMobileViewProvider);
         return IconButton(
           onPressed: _showMoreMenu,
           icon: isMobileView
