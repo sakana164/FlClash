@@ -28,12 +28,12 @@ class CommonDialog extends ConsumerWidget {
       content: Container(
         constraints: BoxConstraints(
           maxHeight: min(
-            size.height,
-            400,
+            size.height - 40,
+            500,
           ),
           maxWidth: min(
-            size.width,
-            300,
+            size.width - 40,
+            350,
           ),
         ),
         child: SingleChildScrollView(
