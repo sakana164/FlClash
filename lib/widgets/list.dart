@@ -100,7 +100,7 @@ class ListItem<T> extends StatelessWidget {
   final Widget? subtitle;
   final EdgeInsets padding;
   final ListTileTitleAlignment tileTitleAlignment;
-  final bool? prue;
+  final bool? dense;
   final Widget? trailing;
   final Delegate delegate;
   final double? horizontalTitleGap;
@@ -114,7 +114,7 @@ class ListItem<T> extends StatelessWidget {
     this.padding = const EdgeInsets.symmetric(horizontal: 16),
     this.trailing,
     this.horizontalTitleGap,
-    this.prue,
+    this.dense,
     this.onTap,
     this.tileTitleAlignment = ListTileTitleAlignment.center,
   }) : delegate = const Delegate();
@@ -128,7 +128,7 @@ class ListItem<T> extends StatelessWidget {
     this.trailing,
     required OpenDelegate this.delegate,
     this.horizontalTitleGap,
-    this.prue,
+    this.dense,
     this.tileTitleAlignment = ListTileTitleAlignment.center,
   }) : onTap = null;
 
@@ -141,7 +141,7 @@ class ListItem<T> extends StatelessWidget {
     this.trailing,
     required OptionsDelegate<T> this.delegate,
     this.horizontalTitleGap,
-    this.prue,
+    this.dense,
     this.tileTitleAlignment = ListTileTitleAlignment.center,
   }) : onTap = null;
 
@@ -154,7 +154,7 @@ class ListItem<T> extends StatelessWidget {
     this.trailing,
     required InputDelegate this.delegate,
     this.horizontalTitleGap,
-    this.prue,
+    this.dense,
     this.tileTitleAlignment = ListTileTitleAlignment.center,
   }) : onTap = null;
 
@@ -166,7 +166,7 @@ class ListItem<T> extends StatelessWidget {
     this.padding = const EdgeInsets.only(left: 16, right: 8),
     required CheckboxDelegate<T> this.delegate,
     this.horizontalTitleGap,
-    this.prue,
+    this.dense,
     this.tileTitleAlignment = ListTileTitleAlignment.center,
   })  : trailing = null,
         onTap = null;
@@ -179,7 +179,7 @@ class ListItem<T> extends StatelessWidget {
     this.padding = const EdgeInsets.only(left: 16, right: 8),
     required SwitchDelegate<T> this.delegate,
     this.horizontalTitleGap,
-    this.prue,
+    this.dense,
     this.tileTitleAlignment = ListTileTitleAlignment.center,
   })  : trailing = null,
         onTap = null;
@@ -192,7 +192,7 @@ class ListItem<T> extends StatelessWidget {
     this.padding = const EdgeInsets.only(left: 12, right: 16),
     required RadioDelegate<T> this.delegate,
     this.horizontalTitleGap = 8,
-    this.prue,
+    this.dense,
     this.tileTitleAlignment = ListTileTitleAlignment.center,
   })  : leading = null,
         onTap = null;
@@ -202,42 +202,8 @@ class ListItem<T> extends StatelessWidget {
     Widget? trailing,
     Widget? leading,
   }) {
-    if (prue == true) {
-      final List<Widget> children = [];
-      if (leading != null) {
-        children.add(leading);
-        children.add(
-          SizedBox(
-            width: horizontalTitleGap,
-          ),
-        );
-      }
-      children.add(
-        Expanded(
-          child: title,
-        ),
-      );
-      if (trailing != null) {
-        children.add(
-          SizedBox(
-            width: horizontalTitleGap,
-          ),
-        );
-        children.add(trailing);
-      }
-      return InkWell(
-        splashFactory: NoSplash.splashFactory,
-        onTap: onTap,
-        child: Container(
-          constraints: BoxConstraints.expand(),
-          padding: padding,
-          child: Row(
-            children: children,
-          ),
-        ),
-      );
-    }
     return ListTile(
+      dense: dense,
       leading: leading ?? this.leading,
       horizontalTitleGap: horizontalTitleGap,
       title: title,
@@ -270,8 +236,7 @@ class ListItem<T> extends StatelessWidget {
                 builder: (_, type) {
                   return AdaptiveSheetScaffold(
                     actions: [
-                      if(openDelegate.action != null)
-                        openDelegate.action!,
+                      if (openDelegate.action != null) openDelegate.action!,
                     ],
                     type: type,
                     body: child,
@@ -283,6 +248,7 @@ class ListItem<T> extends StatelessWidget {
             }
             action();
           }
+
           return _buildListTile(
             onTap: openAction,
           );
@@ -411,7 +377,7 @@ class ListHeader extends StatelessWidget {
           Text(
             title,
             style: Theme.of(context).textTheme.labelLarge?.copyWith(
-                  color: Theme.of(context).colorScheme.onSurfaceVariant,
+                  color: Theme.of(context).colorScheme.onSurfaceVariant.toLight,
                   fontWeight: FontWeight.w600,
                 ),
           ),
