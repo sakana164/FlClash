@@ -32,25 +32,22 @@ class OptionsDialog<T> extends StatelessWidget {
         horizontal: 8,
         vertical: 16,
       ),
-      child: SizedBox(
-        width: 250,
-        child: Wrap(
-          children: [
-            for (final option in options)
-              ListItem.radio(
-                delegate: RadioDelegate(
-                  value: option,
-                  groupValue: value,
-                  onChanged: (T? value) {
-                    Navigator.of(context).pop(value);
-                  },
-                ),
-                title: Text(
-                  this.textBuilder(option),
-                ),
+      child: Wrap(
+        children: [
+          for (final option in options)
+            ListItem.radio(
+              delegate: RadioDelegate(
+                value: option,
+                groupValue: value,
+                onChanged: (T? value) {
+                  Navigator.of(context).pop(value);
+                },
               ),
-          ],
-        ),
+              title: Text(
+                this.textBuilder(option),
+              ),
+            ),
+        ],
       ),
     );
   }
@@ -123,25 +120,22 @@ class _InputDialogState extends State<InputDialog> {
           child: Text(appLocalizations.submit),
         )
       ],
-      child: SizedBox(
-        width: 300,
-        child: Wrap(
-          runSpacing: 16,
-          children: [
-            TextField(
-              maxLines: 1,
-              minLines: 1,
-              controller: textController,
-              decoration: InputDecoration(
-                border: const OutlineInputBorder(),
-                suffixText: suffixText,
-              ),
-              onSubmitted: (_) {
-                _handleUpdate();
-              },
+      child: Wrap(
+        runSpacing: 16,
+        children: [
+          TextField(
+            maxLines: 1,
+            minLines: 1,
+            controller: textController,
+            decoration: InputDecoration(
+              border: const OutlineInputBorder(),
+              suffixText: suffixText,
             ),
-          ],
-        ),
+            onSubmitted: (_) {
+              _handleUpdate();
+            },
+          ),
+        ],
       ),
     );
   }
@@ -503,41 +497,21 @@ class _AddDialogState extends State<AddDialog> {
       ],
       child: Form(
         key: _formKey,
-        child: SizedBox(
-          width: dialogCommonWidth,
-          child: Wrap(
-            runSpacing: 16,
-            children: [
-              if (keyField != null)
-                TextFormField(
-                  maxLines: 2,
-                  minLines: 1,
-                  controller: keyController,
-                  decoration: InputDecoration(
-                    border: const OutlineInputBorder(),
-                    labelText: keyField!.label,
-                  ),
-                  validator: (String? value) {
-                    if (keyField!.validator != null) {
-                      return keyField!.validator!(value);
-                    }
-                    if (value == null || value.isEmpty) {
-                      return appLocalizations.notEmpty;
-                    }
-                    return null;
-                  },
-                ),
+        child: Wrap(
+          runSpacing: 16,
+          children: [
+            if (keyField != null)
               TextFormField(
-                maxLines: 3,
+                maxLines: 2,
                 minLines: 1,
-                controller: valueController,
+                controller: keyController,
                 decoration: InputDecoration(
                   border: const OutlineInputBorder(),
-                  labelText: valueField.label,
+                  labelText: keyField!.label,
                 ),
                 validator: (String? value) {
-                  if (valueField.validator != null) {
-                    return valueField.validator!(value);
+                  if (keyField!.validator != null) {
+                    return keyField!.validator!(value);
                   }
                   if (value == null || value.isEmpty) {
                     return appLocalizations.notEmpty;
@@ -545,8 +519,25 @@ class _AddDialogState extends State<AddDialog> {
                   return null;
                 },
               ),
-            ],
-          ),
+            TextFormField(
+              maxLines: 3,
+              minLines: 1,
+              controller: valueController,
+              decoration: InputDecoration(
+                border: const OutlineInputBorder(),
+                labelText: valueField.label,
+              ),
+              validator: (String? value) {
+                if (valueField.validator != null) {
+                  return valueField.validator!(value);
+                }
+                if (value == null || value.isEmpty) {
+                  return appLocalizations.notEmpty;
+                }
+                return null;
+              },
+            ),
+          ],
         ),
       ),
     );

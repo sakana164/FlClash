@@ -282,24 +282,21 @@ class _RecoveryOptionsDialogState extends State<RecoveryOptionsDialog> {
         horizontal: 8,
         vertical: 16,
       ),
-      child: SizedBox(
-        width: 250,
-        child: Wrap(
-          children: [
-            ListItem(
-              onTap: () {
-                _handleOnTab(RecoveryOption.onlyProfiles);
-              },
-              title: Text(appLocalizations.recoveryProfiles),
-            ),
-            ListItem(
-              onTap: () {
-                _handleOnTab(RecoveryOption.all);
-              },
-              title: Text(appLocalizations.recoveryAll),
-            )
-          ],
-        ),
+      child: Wrap(
+        children: [
+          ListItem(
+            onTap: () {
+              _handleOnTab(RecoveryOption.onlyProfiles);
+            },
+            title: Text(appLocalizations.recoveryProfiles),
+          ),
+          ListItem(
+            onTap: () {
+              _handleOnTab(RecoveryOption.all);
+            },
+            title: Text(appLocalizations.recoveryAll),
+          )
+        ],
       ),
     );
   }
@@ -367,72 +364,69 @@ class _WebDAVFormDialogState extends ConsumerState<WebDAVFormDialog> {
       ],
       child: Form(
         key: _formKey,
-        child: SizedBox(
-          width: dialogCommonWidth,
-          child: Wrap(
-            runSpacing: 16,
-            children: [
-              TextFormField(
-                controller: uriController,
-                maxLines: 5,
-                minLines: 1,
-                decoration: InputDecoration(
-                  prefixIcon: const Icon(Icons.link),
-                  border: const OutlineInputBorder(),
-                  labelText: appLocalizations.address,
-                  helperText: appLocalizations.addressHelp,
-                ),
-                validator: (String? value) {
-                  if (value == null || value.isEmpty || !value.isUrl) {
-                    return appLocalizations.addressTip;
-                  }
-                  return null;
-                },
+        child: Wrap(
+          runSpacing: 16,
+          children: [
+            TextFormField(
+              controller: uriController,
+              maxLines: 5,
+              minLines: 1,
+              decoration: InputDecoration(
+                prefixIcon: const Icon(Icons.link),
+                border: const OutlineInputBorder(),
+                labelText: appLocalizations.address,
+                helperText: appLocalizations.addressHelp,
               ),
-              TextFormField(
-                controller: userController,
-                decoration: InputDecoration(
-                  prefixIcon: const Icon(Icons.account_circle),
-                  border: const OutlineInputBorder(),
-                  labelText: appLocalizations.account,
-                ),
-                validator: (String? value) {
-                  if (value == null || value.isEmpty) {
-                    return appLocalizations.accountTip;
-                  }
-                  return null;
-                },
+              validator: (String? value) {
+                if (value == null || value.isEmpty || !value.isUrl) {
+                  return appLocalizations.addressTip;
+                }
+                return null;
+              },
+            ),
+            TextFormField(
+              controller: userController,
+              decoration: InputDecoration(
+                prefixIcon: const Icon(Icons.account_circle),
+                border: const OutlineInputBorder(),
+                labelText: appLocalizations.account,
               ),
-              ValueListenableBuilder(
-                valueListenable: _obscureController,
-                builder: (_, obscure, __) {
-                  return TextFormField(
-                    controller: passwordController,
-                    obscureText: obscure,
-                    decoration: InputDecoration(
-                      prefixIcon: const Icon(Icons.password),
-                      border: const OutlineInputBorder(),
-                      suffixIcon: IconButton(
-                        icon: Icon(
-                          obscure ? Icons.visibility : Icons.visibility_off,
-                        ),
-                        onPressed: () {
-                          _obscureController.value = !obscure;
-                        },
+              validator: (String? value) {
+                if (value == null || value.isEmpty) {
+                  return appLocalizations.accountTip;
+                }
+                return null;
+              },
+            ),
+            ValueListenableBuilder(
+              valueListenable: _obscureController,
+              builder: (_, obscure, __) {
+                return TextFormField(
+                  controller: passwordController,
+                  obscureText: obscure,
+                  decoration: InputDecoration(
+                    prefixIcon: const Icon(Icons.password),
+                    border: const OutlineInputBorder(),
+                    suffixIcon: IconButton(
+                      icon: Icon(
+                        obscure ? Icons.visibility : Icons.visibility_off,
                       ),
-                      labelText: appLocalizations.password,
+                      onPressed: () {
+                        _obscureController.value = !obscure;
+                      },
                     ),
-                    validator: (String? value) {
-                      if (value == null || value.isEmpty) {
-                        return appLocalizations.passwordTip;
-                      }
-                      return null;
-                    },
-                  );
-                },
-              ),
-            ],
-          ),
+                    labelText: appLocalizations.password,
+                  ),
+                  validator: (String? value) {
+                    if (value == null || value.isEmpty) {
+                      return appLocalizations.passwordTip;
+                    }
+                    return null;
+                  },
+                );
+              },
+            ),
+          ],
         ),
       ),
     );

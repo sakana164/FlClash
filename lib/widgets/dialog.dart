@@ -31,11 +31,8 @@ class CommonDialog extends ConsumerWidget {
             size.height - 40,
             500,
           ),
-          maxWidth: min(
-            size.width - 40,
-            350,
-          ),
         ),
+        width: size.width - 40,
         child: SingleChildScrollView(
           child: child,
         ),

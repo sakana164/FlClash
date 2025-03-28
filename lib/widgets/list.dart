@@ -352,11 +352,13 @@ class ListItem<T> extends StatelessWidget {
 
 class ListHeader extends StatelessWidget {
   final String title;
+  final String? subTitle;
   final List<Widget> actions;
 
   const ListHeader({
     super.key,
     required this.title,
+    this.subTitle,
     List<Widget>? actions,
   }) : actions = actions ?? const [];
 
@@ -374,12 +376,28 @@ class ListHeader extends StatelessWidget {
         mainAxisSize: MainAxisSize.max,
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(
-            title,
-            style: Theme.of(context).textTheme.labelLarge?.copyWith(
-                  color: Theme.of(context).colorScheme.onSurfaceVariant.toLight,
-                  fontWeight: FontWeight.w600,
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                title,
+                style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                      color: Theme.of(context)
+                          .colorScheme
+                          .onSurfaceVariant
+                          .toLight,
+                      fontWeight: FontWeight.w600,
+                    ),
+              ),
+              if (subTitle != null)
+                Text(
+                  subTitle!,
+                  style: Theme.of(context).textTheme.labelSmall?.copyWith(
+                        color: Theme.of(context).colorScheme.outline,
+                        fontWeight: FontWeight.w200,
+                      ),
                 ),
+            ],
           ),
           Expanded(
             flex: 1,

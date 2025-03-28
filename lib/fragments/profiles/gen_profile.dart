@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:fl_clash/clash/core.dart';
 import 'package:fl_clash/common/common.dart';
+import 'package:fl_clash/enum/enum.dart';
 import 'package:fl_clash/models/models.dart';
 import 'package:fl_clash/state.dart';
 import 'package:fl_clash/widgets/widgets.dart';
@@ -123,9 +124,13 @@ class _GenProfileState extends State<GenProfile> {
               // ),
               SliverToBoxAdapter(
                 child: Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 16),
+                  padding: EdgeInsets.only(
+                    left: 16,
+                    right: 12,
+                  ),
                   child: ListHeader(
                     title: '规则',
+                    subTitle: "在原有规则基础上附加规则",
                     actions: [
                       IconButton.filledTonal(
                         icon: Icon(Icons.add),
@@ -156,7 +161,7 @@ class _GenProfileState extends State<GenProfile> {
                         ),
                         decoration: BoxDecoration(
                           color: context.colorScheme.surfaceContainer,
-                          borderRadius: BorderRadius.circular(12),
+                          borderRadius: BorderRadius.circular(16),
                         ),
                         clipBehavior: Clip.hardEdge,
                         child: ListTile(
@@ -212,6 +217,39 @@ class AddRuleDialog extends StatelessWidget {
   Widget build(BuildContext context) {
     return CommonDialog(
       title: "添加规则",
+      actions: [
+        TextButton(
+          onPressed: () {},
+          child: Text("确定"),
+        ),
+      ],
+      child: Form(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            FilledButton.tonal(
+              onPressed: () {},
+              child: Text("DOMAIN"),
+            ),
+            SizedBox(
+              height: 24,
+            ),
+            TextFormField(
+              decoration: InputDecoration(
+                border: const OutlineInputBorder(),
+                labelText: "内容",
+              ),
+            ),
+            SizedBox(
+              height: 24,
+            ),
+            // FilledButton.tonal(
+            //   onPressed: () {},
+            //   child: Text("PROXY"),
+            // ),
+          ],
+        ),
+      ),
     );
   }
 }
