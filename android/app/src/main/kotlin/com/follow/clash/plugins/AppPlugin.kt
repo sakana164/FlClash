@@ -291,7 +291,7 @@ class AppPlugin : FlutterPlugin, MethodChannel.MethodCallHandler, ActivityAware 
     private fun getPackages(): List<Package> {
         val packageManager = FlClashApplication.getAppContext().packageManager
         if (packages.isNotEmpty()) return packages
-        packageManager?.getInstalledPackages(PackageManager.GET_META_DATA or PackageManager.PERMISSION_GRANTED)
+        packageManager?.getInstalledPackages(PackageManager.GET_META_DATA or PackageManager.GET_PERMISSIONS)
             ?.filter {
                 it.packageName != FlClashApplication.getAppContext().packageName && (
                         it.requestedPermissions?.contains(Manifest.permission.INTERNET) == true
