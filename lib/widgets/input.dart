@@ -1,5 +1,4 @@
 import 'package:fl_clash/common/app_localizations.dart';
-import 'package:fl_clash/common/constant.dart';
 import 'package:fl_clash/models/common.dart';
 import 'package:fl_clash/state.dart';
 import 'package:fl_clash/widgets/dialog.dart';
