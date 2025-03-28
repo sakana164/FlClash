@@ -2,6 +2,7 @@ package com.follow.clash;
 
 import android.app.Application
 import android.content.Context;
+import io.flutter.Log
 
 class FlClashApplication : Application() {
     companion object {
@@ -13,6 +14,7 @@ class FlClashApplication : Application() {
 
     override fun onCreate() {
         super.onCreate()
+        Log.setLogLevel(android.util.Log.VERBOSE)
         instance = this
     }
 }

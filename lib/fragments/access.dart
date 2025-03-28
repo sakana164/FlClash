@@ -151,6 +151,9 @@ class _AccessFragmentState extends ConsumerState<AccessFragment> {
       onPressed: () async {
         final res = await showSheet<int>(
           context: context,
+          props: SheetProps(
+            isScrollControlled: true,
+          ),
           builder: (_, type) {
             return AdaptiveSheetScaffold(
               type: type,
@@ -768,17 +771,19 @@ class _AccessControlPanelState extends ConsumerState<AccessControlPanel> {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(bottom: 32),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          ..._buildModeSetting(),
-          ..._buildSortSetting(),
-          ..._buildSourceSetting(),
-          ..._buildActionSetting(),
-        ],
+    return SingleChildScrollView(
+      child: Padding(
+        padding: const EdgeInsets.only(bottom: 32),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            ..._buildModeSetting(),
+            ..._buildSortSetting(),
+            ..._buildSourceSetting(),
+            ..._buildActionSetting(),
+          ],
+        ),
       ),
     );
   }
