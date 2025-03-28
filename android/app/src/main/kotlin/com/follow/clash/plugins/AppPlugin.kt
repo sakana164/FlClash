@@ -291,13 +291,14 @@ class AppPlugin : FlutterPlugin, MethodChannel.MethodCallHandler, ActivityAware 
     private fun getPackages(): List<Package> {
         val packageManager = FlClashApplication.getAppContext().packageManager
         if (packages.isNotEmpty()) return packages
-        packageManager?.getInstalledPackages(PackageManager.GET_META_DATA)?.filter {
-            it.packageName != FlClashApplication.getAppContext().packageName && (
-                    it.requestedPermissions?.contains(Manifest.permission.INTERNET) == true
-                            || it.packageName == "android"
-                    )
+        packageManager?.getInstalledPackages(PackageManager.GET_META_DATA or PackageManager.PERMISSION_GRANTED)
+            ?.filter {
+                it.packageName != FlClashApplication.getAppContext().packageName && (
+                        it.requestedPermissions?.contains(Manifest.permission.INTERNET) == true
+                                || it.packageName == "android"
+                        )
 
-        }?.map {
+            }?.map {
             Package(
                 packageName = it.packageName,
                 label = it.applicationInfo?.loadLabel(packageManager).toString(),
