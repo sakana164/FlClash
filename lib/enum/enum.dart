@@ -420,3 +420,15 @@ enum RuleAction {
   SUB_RULE,
   MATCH,
 }
+
+enum RuleTarget {
+  DIRECT,
+  REJECT,
+  A,
+  B,
+  C,
+  D,
+  E,
+  F,
+  G,
+}

@@ -126,7 +126,7 @@ class _GenProfileState extends State<GenProfile> {
                 child: Padding(
                   padding: EdgeInsets.only(
                     left: 16,
-                    right: 12,
+                    right: 14,
                   ),
                   child: ListHeader(
                     title: '规则',
@@ -243,10 +243,28 @@ class AddRuleDialog extends StatelessWidget {
             SizedBox(
               height: 24,
             ),
-            // FilledButton.tonal(
-            //   onPressed: () {},
-            //   child: Text("PROXY"),
-            // ),
+            DropdownMenu(
+              dropdownMenuEntries: [
+                ...RuleTarget.values.map(
+                  (item) => DropdownMenuEntry(
+                    value: item.name,
+                    label: item.name,
+                  ),
+                ),
+              ],
+            ),
+            SizedBox(
+              height: 20,
+            ),
+            ListItem(
+              padding: EdgeInsets.zero,
+              title: Text("解析IP"),
+              trailing: Radio(
+                value: null,
+                groupValue: null,
+                onChanged: (Null value) {},
+              ),
+            )
           ],
         ),
       ),

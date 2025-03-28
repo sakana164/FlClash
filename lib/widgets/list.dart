@@ -392,9 +392,8 @@ class ListHeader extends StatelessWidget {
               if (subTitle != null)
                 Text(
                   subTitle!,
-                  style: Theme.of(context).textTheme.labelSmall?.copyWith(
+                  style: Theme.of(context).textTheme.bodySmall?.copyWith(
                         color: Theme.of(context).colorScheme.outline,
-                        fontWeight: FontWeight.w200,
                       ),
                 ),
             ],
