@@ -244,6 +244,7 @@ class AddRuleDialog extends StatelessWidget {
               height: 24,
             ),
             DropdownMenu(
+              menuHeight: 250,
               dropdownMenuEntries: [
                 ...RuleTarget.values.map(
                   (item) => DropdownMenuEntry(
