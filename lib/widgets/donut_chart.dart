@@ -115,7 +115,6 @@ class DonutChartPainter extends CustomPainter {
 
   List<DonutChartData> get interpolatedData {
     if (oldData.length != newData.length) return newData;
-
     final interpolatedData = List.generate(newData.length, (index) {
       final oldValue = oldData[index].value;
       final newValue = newData[index].value;
