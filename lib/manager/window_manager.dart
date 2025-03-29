@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:io';
 
 import 'package:fl_clash/common/common.dart';
@@ -24,6 +25,8 @@ class WindowManager extends ConsumerStatefulWidget {
 
 class _WindowContainerState extends ConsumerState<WindowManager>
     with WindowListener, WindowExtListener {
+  // Timer? _timer;
+
   @override
   Widget build(BuildContext context) {
     return widget.child;
@@ -47,6 +50,9 @@ class _WindowContainerState extends ConsumerState<WindowManager>
     );
     windowExtManager.addListener(this);
     windowManager.addListener(this);
+    // _timer = Timer.periodic(Duration(seconds: 5), (_) {
+    //   render?.pause();
+    // });
   }
 
   @override
@@ -111,6 +117,7 @@ class _WindowContainerState extends ConsumerState<WindowManager>
 
   @override
   Future<void> dispose() async {
+    // _timer?.cancel();
     windowManager.removeListener(this);
     windowExtManager.removeListener(this);
     super.dispose();

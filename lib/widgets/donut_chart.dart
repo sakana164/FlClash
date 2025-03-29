@@ -118,7 +118,6 @@ class DonutChartPainter extends CustomPainter {
     final interpolatedData = List.generate(newData.length, (index) {
       final oldValue = oldData[index].value;
       final newValue = newData[index].value;
-
       final logOldValue = _logTransform(oldValue);
       final logNewValue = _logTransform(newValue);
       final interpolatedLogValue =

@@ -807,7 +807,7 @@ class AppController {
   }
 
   updateVisible() async {
-    final visible = await window?.isVisible();
+    final visible = await window?.isVisible;
     if (visible != null && !visible) {
       window?.show();
     } else {
