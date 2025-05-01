@@ -431,6 +431,7 @@ class CommonScaffoldState extends State<CommonScaffold> {
     final scaffold = Scaffold(
       appBar: _buildAppBar(),
       body: body,
+      resizeToAvoidBottomInset: true,
       backgroundColor: widget.backgroundColor,
       floatingActionButton: ValueListenableBuilder<Widget?>(
         valueListenable: _floatingActionButton,

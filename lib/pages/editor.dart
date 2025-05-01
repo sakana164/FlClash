@@ -151,6 +151,7 @@ class _EditorPageState extends ConsumerState<EditorPage> {
         ],
         body: CodeEditor(
           findController: _findController,
+          maxLengthSingleLineRendering: 200,
           findBuilder: (context, controller, readOnly) => FindPanel(
             controller: controller,
             readOnly: readOnly,
