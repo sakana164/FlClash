@@ -499,8 +499,6 @@ class AppController {
   }
 
   init() async {
-    await _handlePreference();
-    await _handlerDisclaimer();
     await _initCore();
     await _initStatus();
     updateTray(true);
@@ -514,6 +512,8 @@ class AppController {
     } else {
       window?.hide();
     }
+    await _handlePreference();
+    await _handlerDisclaimer();
     _ref.read(initProvider.notifier).value = true;
   }
 
