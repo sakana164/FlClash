@@ -250,6 +250,7 @@ class _ProxiesListFragmentState extends State<ProxiesListFragment> {
     return Consumer(
       builder: (_, ref, __) {
         final state = ref.watch(proxiesListSelectorStateProvider);
+        ref.watch(themeSettingProvider.select((state) => state.textScale));
         if (state.groupNames.isEmpty) {
           return NullStatus(
             label: appLocalizations.nullProxies,
@@ -484,12 +485,12 @@ class _ListHeaderState extends State<ListHeader>
     return CommonCard(
       enterAnimated: widget.enterAnimated,
       key: widget.key,
-      radius: 14,
+      radius: 16.ap,
       type: CommonCardType.filled,
       child: Padding(
         padding: const EdgeInsets.symmetric(
           horizontal: 16,
-          vertical: 8,
+          vertical: 12,
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -587,7 +588,10 @@ class _ListHeaderState extends State<ListHeader>
                   const SizedBox(
                     width: 6,
                   ),
-                ],
+                ] else
+                  SizedBox(
+                    width: 4,
+                  ),
                 AnimatedBuilder(
                   animation: _animationController.view,
                   builder: (_, __) {

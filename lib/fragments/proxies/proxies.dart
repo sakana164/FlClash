@@ -128,8 +128,6 @@ class _ProxiesFragmentState extends ConsumerState<ProxiesFragment>
         (state) => state.type,
       ),
     );
-
-    ref.watch(themeSettingProvider.select((state) => state.textScale));
     return switch (proxiesType) {
       ProxiesType.tab => ProxiesTabFragment(
           key: _proxiesTabKey,
@@ -144,8 +142,9 @@ class _IconConfigView extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final iconMap =
-        ref.watch(proxiesStyleSettingProvider.select((state) => state.iconMap));
+    final iconMap = ref.watch(proxiesStyleSettingProvider.select(
+      (state) => state.iconMap,
+    ));
     return MapInputPage(
       title: appLocalizations.iconConfiguration,
       map: iconMap,

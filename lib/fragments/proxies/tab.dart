@@ -178,6 +178,7 @@ class ProxiesTabFragmentState extends ConsumerState<ProxiesTabFragment>
 
   @override
   Widget build(BuildContext context) {
+    ref.watch(themeSettingProvider.select((state) => state.textScale));
     final state = ref.watch(groupNamesStateProvider);
     final groupNames = state.groupNames;
     if (groupNames.isEmpty) {
