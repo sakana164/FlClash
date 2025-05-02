@@ -528,3 +528,8 @@ class TextPainterParams with _$TextPainterParams {
   factory TextPainterParams.fromJson(Map<String, Object?> json) =>
       _$TextPainterParamsFromJson(json);
 }
+
+
+class CloseWindowIntent extends Intent {
+  const CloseWindowIntent();
+}

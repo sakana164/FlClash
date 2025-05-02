@@ -10,10 +10,6 @@ import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hotkey_manager/hotkey_manager.dart';
 
-class CloseWindowIntent extends Intent {
-  const CloseWindowIntent();
-}
-
 class HotKeyManager extends ConsumerStatefulWidget {
   final Widget child;
 
@@ -102,6 +98,9 @@ class _HotKeyManagerState extends ConsumerState<HotKeyManager> {
         actions: {
           CloseWindowIntent: CallbackAction<CloseWindowIntent>(
             onInvoke: (_) => globalState.appController.handleBackOrExit(),
+          ),
+          DoNothingIntent: CallbackAction<DoNothingIntent>(
+            onInvoke: (_) => null,
           ),
         },
         child: child,
