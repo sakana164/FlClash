@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:fl_clash/common/common.dart';
 import 'package:fl_clash/enum/enum.dart';
 import 'package:fl_clash/models/common.dart';
@@ -8,13 +10,36 @@ import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hotkey_manager/hotkey_manager.dart';
 
-class HotKeyManager extends StatelessWidget {
+class CloseWindowIntent extends Intent {
+  const CloseWindowIntent();
+}
+
+class HotKeyManager extends ConsumerStatefulWidget {
   final Widget child;
 
   const HotKeyManager({
     super.key,
     required this.child,
   });
+
+  @override
+  ConsumerState<HotKeyManager> createState() => _HotKeyManagerState();
+}
+
+class _HotKeyManagerState extends ConsumerState<HotKeyManager> {
+  @override
+  void initState() {
+    super.initState();
+    ref.listenManual(
+      hotKeyActionsProvider,
+      (prev, next) {
+        if (!hotKeyActionListEquality.equals(prev, next)) {
+          _updateHotKeys(hotKeyActions: next);
+        }
+      },
+      fireImmediately: true,
+    );
+  }
 
   _handleHotKeyAction(HotAction action) async {
     switch (action) {
@@ -29,6 +54,15 @@ class HotKeyManager extends StatelessWidget {
       case HotAction.tun:
         globalState.appController.updateTun();
     }
+  }
+
+  SingleActivator _controllerActivator(LogicalKeyboardKey trigger) {
+    final control = Platform.isMacOS ? false : true;
+    return SingleActivator(
+      trigger,
+      control: control,
+      meta: !control,
+    );
   }
 
   _updateHotKeys({
@@ -59,22 +93,26 @@ class HotKeyManager extends StatelessWidget {
     await Future.wait(hotkeyActionHandles);
   }
 
+  _buildShortcuts(Widget child) {
+    return Shortcuts(
+      shortcuts: {
+        _controllerActivator(LogicalKeyboardKey.keyW): CloseWindowIntent(),
+      },
+      child: Actions(
+        actions: {
+          CloseWindowIntent: CallbackAction<CloseWindowIntent>(
+            onInvoke: (_) => globalState.appController.handleBackOrExit(),
+          ),
+        },
+        child: child,
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Consumer(
-      builder: (_, ref, child) {
-        ref.listenManual(
-          hotKeyActionsProvider,
-          (prev, next) {
-            if (!hotKeyActionListEquality.equals(prev, next)) {
-              _updateHotKeys(hotKeyActions: next);
-            }
-          },
-          fireImmediately: true,
-        );
-        return child!;
-      },
-      child: child,
+    return _buildShortcuts(
+      widget.child,
     );
   }
 }
