@@ -21,7 +21,6 @@ dependencies:
   window_ext:
     path: plugins/window_ext
   launch_at_startup: ^0.5.1
-  windows_single_instance: ^1.0.1
   json_annotation: ^4.9.0
   file_picker: ^10.1.2
   mobile_scanner: ^6.0.2
