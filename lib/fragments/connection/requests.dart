@@ -120,9 +120,11 @@ class _RequestsFragmentState extends ConsumerState<RequestsFragment>
         return;
       }
       WidgetsBinding.instance.addPostFrameCallback((_) {
-        _requestsStateNotifier.value = _requestsStateNotifier.value.copyWith(
-          connections: _requests,
-        );
+        if(mounted){
+          _requestsStateNotifier.value = _requestsStateNotifier.value.copyWith(
+            connections: _requests,
+          );
+        }
       });
     }, duration: commonDuration);
   }
