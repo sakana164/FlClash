@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:fl_clash/common/common.dart';
 import 'package:fl_clash/enum/enum.dart';
 import 'package:fl_clash/models/common.dart';
@@ -52,15 +50,6 @@ class _HotKeyManagerState extends ConsumerState<HotKeyManager> {
     }
   }
 
-  SingleActivator _controllerActivator(LogicalKeyboardKey trigger) {
-    final control = Platform.isMacOS ? false : true;
-    return SingleActivator(
-      trigger,
-      control: control,
-      meta: !control,
-    );
-  }
-
   _updateHotKeys({
     required List<HotKeyAction> hotKeyActions,
   }) async {
@@ -92,7 +81,8 @@ class _HotKeyManagerState extends ConsumerState<HotKeyManager> {
   _buildShortcuts(Widget child) {
     return Shortcuts(
       shortcuts: {
-        _controllerActivator(LogicalKeyboardKey.keyW): CloseWindowIntent(),
+        utils.controlSingleActivator(LogicalKeyboardKey.keyW):
+            CloseWindowIntent(),
       },
       child: Actions(
         actions: {

@@ -23,7 +23,8 @@ final baseInfoEdgeInsets = EdgeInsets.symmetric(
   horizontal: 16.ap,
 );
 
-final defaultTextScaleFactor = WidgetsBinding.instance.platformDispatcher.textScaleFactor;
+final defaultTextScaleFactor = WidgetsBinding.instance.platformDispatcher
+    .textScaleFactor;
 const httpTimeoutDuration = Duration(milliseconds: 5000);
 const moreDuration = Duration(milliseconds: 100);
 const animateDuration = Duration(milliseconds: 100);
@@ -35,8 +36,8 @@ const geoIpFileName = "GeoIP.dat";
 const geoSiteFileName = "GeoSite.dat";
 final double kHeaderHeight = system.isDesktop
     ? !Platform.isMacOS
-        ? 40
-        : 28
+    ? 40
+    : 28
     : 0;
 const profilesDirectoryName = "profiles";
 const localhost = "127.0.0.1";
@@ -65,7 +66,7 @@ const packageListEquality = ListEquality<Package>();
 const hotKeyActionListEquality = ListEquality<HotKeyAction>();
 const stringAndStringMapEquality = MapEquality<String, String>();
 const stringAndStringMapEntryIterableEquality =
-    IterableEquality<MapEntry<String, String>>();
+IterableEquality<MapEntry<String, String>>();
 const delayMapEquality = MapEquality<String, Map<String, int?>>();
 const stringSetEquality = SetEquality<String>();
 const keyboardModifierListEquality = SetEquality<KeyboardModifier>();
