@@ -311,10 +311,15 @@ class SuperGridState extends State<SuperGrid> with TickerProviderStateMixin {
     }
     const spring = SpringDescription(
       mass: 1,
-      stiffness: 500,
+      stiffness: 100,
       damping: 10,
     );
-    final simulation = SpringSimulation(spring, 0, 1, 0);
+    final simulation = SpringSimulation(
+      spring,
+      0,
+      1,
+      0,
+    );
     _fakeDragWidgetAnimation = Tween(
       begin: details.offset - _parentOffset,
       end: _targetOffset,
