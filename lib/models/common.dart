@@ -18,7 +18,7 @@ class NavigationItem with _$NavigationItem {
     required PageLabel label,
     final String? description,
     required Widget fragment,
-    @Default(false) bool keep,
+    @Default(true) bool keep,
     String? path,
     @Default([NavigationItemMode.mobile, NavigationItemMode.desktop])
     List<NavigationItemMode> modes,

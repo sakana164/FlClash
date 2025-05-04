@@ -131,7 +131,6 @@ class _ProfilesFragmentState extends State<ProfilesFragment> with PageMixin {
         return Align(
           alignment: Alignment.topCenter,
           child: SingleChildScrollView(
-            key: profilesStoreKey,
             padding: const EdgeInsets.only(
               left: 16,
               right: 16,

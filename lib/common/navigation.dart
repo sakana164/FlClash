@@ -12,6 +12,7 @@ class Navigation {
   }) {
     return [
       const NavigationItem(
+        keep: false,
         icon: Icon(Icons.space_dashboard),
         label: PageLabel.dashboard,
         fragment: DashboardFragment(

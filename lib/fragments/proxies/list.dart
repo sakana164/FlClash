@@ -272,7 +272,6 @@ class _ProxiesListFragmentState extends State<ProxiesListFragment> {
                 child: ScrollConfiguration(
                   behavior: HiddenBarScrollBehavior(),
                   child: ListView.builder(
-                    key: proxiesStoreKey,
                     padding: const EdgeInsets.all(16),
                     controller: _controller,
                     itemExtentBuilder: (index, __) {
