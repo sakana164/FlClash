@@ -305,7 +305,7 @@ class SuperGridState extends State<SuperGrid> with TickerProviderStateMixin {
   }
 
   _handleDragEnd(DraggableDetails details) async {
-    debouncer.cancel(DebounceTag.handleWill);
+    debouncer.cancel(FunctionTag.handleWill);
     if (_targetIndex == -1) {
       return;
     }
@@ -501,7 +501,7 @@ class SuperGridState extends State<SuperGrid> with TickerProviderStateMixin {
       },
       onWillAcceptWithDetails: (_) {
         debouncer.call(
-          DebounceTag.handleWill,
+          FunctionTag.handleWill,
           _handleWill,
           args: [index],
         );

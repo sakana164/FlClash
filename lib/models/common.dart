@@ -18,7 +18,7 @@ class NavigationItem with _$NavigationItem {
     required PageLabel label,
     final String? description,
     required Widget fragment,
-    @Default(true) bool keep,
+    @Default(false) bool keep,
     String? path,
     @Default([NavigationItemMode.mobile, NavigationItemMode.desktop])
     List<NavigationItemMode> modes,
@@ -504,7 +504,6 @@ class PopupMenuItemData {
     this.icon,
     required this.label,
     required this.onPressed,
-    this.type,
     this.iconSize,
   });
 
@@ -512,7 +511,6 @@ class PopupMenuItemData {
   final String label;
   final VoidCallback? onPressed;
   final IconData? icon;
-  final PopupMenuItemType? type;
 }
 
 @freezed
@@ -528,7 +526,6 @@ class TextPainterParams with _$TextPainterParams {
   factory TextPainterParams.fromJson(Map<String, Object?> json) =>
       _$TextPainterParamsFromJson(json);
 }
-
 
 class CloseWindowIntent extends Intent {
   const CloseWindowIntent();

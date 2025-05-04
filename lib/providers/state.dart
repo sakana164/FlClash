@@ -522,6 +522,21 @@ VM2? layoutChange(Ref ref) {
 }
 
 @riverpod
+VM2<int, bool> checkIp(Ref ref) {
+  final checkIpNum = ref.watch(checkIpNumProvider);
+  final containsDetection = ref.watch(
+    dashboardStateProvider.select(
+      (state) =>
+          state.dashboardWidgets.contains(DashboardWidget.networkDetection),
+    ),
+  );
+  return VM2(
+    a: checkIpNum,
+    b: containsDetection,
+  );
+}
+
+@riverpod
 ColorScheme genColorScheme(
   Ref ref,
   Brightness brightness, {

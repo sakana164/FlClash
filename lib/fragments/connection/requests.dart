@@ -111,7 +111,7 @@ class _RequestsFragmentState extends ConsumerState<RequestsFragment>
   }
 
   updateRequestsThrottler() {
-    throttler.call("request", () {
+    throttler.call(FunctionTag.requests, () {
       final isEquality = connectionListEquality.equals(
         _requests,
         _requestsStateNotifier.value.connections,

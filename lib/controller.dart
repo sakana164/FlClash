@@ -31,18 +31,18 @@ class AppController {
   AppController(this.context, WidgetRef ref) : _ref = ref;
 
   updateClashConfigDebounce() {
-    debouncer.call(DebounceTag.updateClashConfig, () async {
+    debouncer.call(FunctionTag.updateClashConfig, () async {
       final isPatch = globalState.appState.needApply ? false : true;
       await updateClashConfig(isPatch);
     });
   }
 
   updateGroupsDebounce() {
-    debouncer.call(DebounceTag.updateGroups, updateGroups);
+    debouncer.call(FunctionTag.updateGroups, updateGroups);
   }
 
   addCheckIpNumDebounce() {
-    debouncer.call(DebounceTag.addCheckIpNum, () {
+    debouncer.call(FunctionTag.addCheckIpNum, () {
       _ref.read(checkIpNumProvider.notifier).add();
     });
   }
@@ -50,17 +50,17 @@ class AppController {
   applyProfileDebounce({
     bool silence = false,
   }) {
-    debouncer.call(DebounceTag.applyProfile, (silence) {
+    debouncer.call(FunctionTag.applyProfile, (silence) {
       applyProfile(silence: silence);
     }, args: [silence]);
   }
 
   savePreferencesDebounce() {
-    debouncer.call(DebounceTag.savePreferences, savePreferences);
+    debouncer.call(FunctionTag.savePreferences, savePreferences);
   }
 
   changeProxyDebounce(String groupName, String proxyName) {
-    debouncer.call(DebounceTag.changeProxy,
+    debouncer.call(FunctionTag.changeProxy,
         (String groupName, String proxyName) async {
       await changeProxy(
         groupName: groupName,
@@ -499,6 +499,9 @@ class AppController {
   }
 
   init() async {
+    FlutterError.onError = (details) {
+      commonPrint.log(details.stack.toString());
+    };
     await _initCore();
     await _initStatus();
     updateTray(true);
@@ -760,7 +763,8 @@ class AppController {
       await Future.delayed(commonDuration);
     }
     if (_ref.read(packagesProvider).isEmpty) {
-      _ref.read(packagesProvider.notifier).value = await app?.getPackages() ?? [];
+      _ref.read(packagesProvider.notifier).value =
+          await app?.getPackages() ?? [];
     }
     return _ref.read(packagesProvider);
   }

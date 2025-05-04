@@ -354,7 +354,6 @@ class ProfileItem extends StatelessWidget {
                           onPressed: () {
                             _handleDeleteProfile(context);
                           },
-                          type: PopupMenuItemType.danger,
                         ),
                       ],
                     ),

@@ -38,7 +38,7 @@ class _WindowContainerState extends ConsumerState<WindowManager>
       (prev, next) {
         if (prev != next) {
           debouncer.call(
-            DebounceTag.autoLaunch,
+            FunctionTag.autoLaunch,
             () {
               autoLaunch?.updateStatus(next);
             },

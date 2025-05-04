@@ -122,12 +122,17 @@ class _EditorPageState extends ConsumerState<EditorPage> {
             (value) => CommonPopupBox(
               targetBuilder: (open) {
                 return IconButton(
-                  onPressed: open,
+                  onPressed: () {
+                    open(
+                      offset: Offset(0, 20),
+                    );
+                  },
                   icon: const Icon(Icons.more_vert),
                 );
               },
               popup: CommonPopupMenu(
-                minWidth: 180,
+                minWidth: 160,
+                minItemVerticalPadding: 16,
                 items: [
                   PopupMenuItemData(
                     icon: Icons.search,

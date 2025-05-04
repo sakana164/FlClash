@@ -183,7 +183,7 @@ class _$NavigationItemImpl implements _NavigationItem {
       required this.label,
       this.description,
       required this.fragment,
-      this.keep = true,
+      this.keep = false,
       this.path,
       final List<NavigationItemMode> modes = const [
         NavigationItemMode.mobile,
