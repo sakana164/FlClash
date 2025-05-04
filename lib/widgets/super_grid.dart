@@ -56,6 +56,7 @@ class SuperGridState extends State<SuperGrid> with TickerProviderStateMixin {
   final ValueNotifier<bool> _animating = ValueNotifier(false);
 
   final _dragWidgetSizeNotifier = ValueNotifier(Size.zero);
+
   final _dragIndexNotifier = ValueNotifier(-1);
 
   late AnimationController _transformController;
@@ -310,7 +311,7 @@ class SuperGridState extends State<SuperGrid> with TickerProviderStateMixin {
     }
     const spring = SpringDescription(
       mass: 1,
-      stiffness: 100,
+      stiffness: 500,
       damping: 10,
     );
     final simulation = SpringSimulation(spring, 0, 1, 0);
@@ -369,7 +370,6 @@ class SuperGridState extends State<SuperGrid> with TickerProviderStateMixin {
   }
 
   _handleDelete(int index) async {
-    await _transformCompleter?.future;
     _preTransformState();
     final indexWhere = _tempIndexList.indexWhere((i) => i == index);
     _tempIndexList.removeAt(indexWhere);
@@ -504,21 +504,31 @@ class SuperGridState extends State<SuperGrid> with TickerProviderStateMixin {
       },
     );
     final shakeTarget = ValueListenableBuilder(
-      valueListenable: _dragIndexNotifier,
-      builder: (_, dragIndex, child) {
-        if (dragIndex == index) {
+      valueListenable: _animating,
+      builder: (_, animating, child) {
+        if (animating) {
+          return target;
+        } else {
           return child!;
         }
-        return _shakeWrap(
-          _DeletableContainer(
-            onDelete: () {
-              _handleDelete(index);
-            },
-            child: child!,
-          ),
-        );
       },
-      child: target,
+      child: ValueListenableBuilder(
+        valueListenable: _dragIndexNotifier,
+        builder: (_, dragIndex, child) {
+          if (dragIndex == index) {
+            return child!;
+          }
+          return _shakeWrap(
+            _DeletableContainer(
+              onDelete: () {
+                _handleDelete(index);
+              },
+              child: child!,
+            ),
+          );
+        },
+        child: target,
+      ),
     );
     final draggableChild = system.isDesktop
         ? Draggable(
