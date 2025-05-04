@@ -65,7 +65,6 @@ class Navigation {
         icon: Icon(Icons.storage),
         label: PageLabel.resources,
         description: "resourcesDesc",
-        keep: false,
         fragment: Resources(
           key: GlobalObjectKey(
             PageLabel.resources,

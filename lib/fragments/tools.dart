@@ -108,6 +108,7 @@ class _ToolboxFragmentState extends ConsumerState<ToolsFragment> {
       ..._getOtherList(vm2.b),
     ];
     return ListView.builder(
+      key: toolsStoreKey,
       itemCount: items.length,
       itemBuilder: (_, index) => items[index],
       padding: const EdgeInsets.only(bottom: 20),
