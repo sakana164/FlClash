@@ -694,10 +694,16 @@ class AppController {
     return List.of(proxies)
       ..sort(
         (a, b) {
-          final aDelay =
-              _ref.read(getDelayProvider(proxyName: a.name, testUrl: testUrl));
-          final bDelay =
-              _ref.read(getDelayProvider(proxyName: b.name, testUrl: testUrl));
+          final aDelay = _ref.read(getDelayProvider(
+            proxyName: a.name,
+            testUrl: testUrl,
+          ));
+          final bDelay = _ref.read(
+            getDelayProvider(
+              proxyName: b.name,
+              testUrl: testUrl,
+            ),
+          );
           if (aDelay == null && bDelay == null) {
             return 0;
           }
