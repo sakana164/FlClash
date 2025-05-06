@@ -118,7 +118,6 @@ func handleStartTun(fd int, callback unsafe.Pointer) {
 			removeTunHook()
 		}
 	}
-	closeConnections()
 }
 
 func handleGetRunTime() string {

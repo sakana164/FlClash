@@ -118,6 +118,7 @@ class GlobalState {
     startTime ??= DateTime.now();
     await clashCore.startListener();
     await service?.startVpn();
+    await clashCore.closeConnections();
     startUpdateTasks(tasks);
   }
 
