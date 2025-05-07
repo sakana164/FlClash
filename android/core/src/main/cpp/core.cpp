@@ -1,5 +1,3 @@
-#include <jni.h>
-
 #ifdef LIBCLASH
 #include <jni.h>
 #include <string>
@@ -36,18 +34,18 @@ static void call_tun_interface_protect_impl(void *tun_interface, int fd) {
                         (jint) fd);
 }
 
-static const char*
+static const char *
 call_tun_interface_resolve_process_impl(void *tun_interface, int protocol,
-                                         const char *source,
-                                         const char *target,
-                                         int uid) {
+                                        const char *source,
+                                        const char *target,
+                                        int uid) {
     ATTACH_JNI();
-    jstring packageName = (jstring)env->CallObjectMethod((jobject) tun_interface,
-                              (jmethodID) m_tun_interface_resolve_process,
-                              (jint) protocol,
-                              (jstring) new_string(source),
-                              (jstring) new_string(target),
-                              (jint) uid);
+    jstring packageName = (jstring) env->CallObjectMethod((jobject) tun_interface,
+                                                          (jmethodID) m_tun_interface_resolve_process,
+                                                          (jint) protocol,
+                                                          (jstring) new_string(source),
+                                                          (jstring) new_string(target),
+                                                          (jint) uid);
     return get_string(packageName);
 }
 
@@ -65,7 +63,7 @@ JNI_OnLoad(JavaVM *vm, void *reserved) {
 
     m_tun_interface_protect = find_method(c_tun_interface, "protect", "(I)V");
     m_tun_interface_resolve_process = find_method(c_tun_interface, "resolverProcess",
-                                                   "(ILjava/lang/String;Ljava/lang/String;I)Ljava/lang/String;");
+                                                  "(ILjava/lang/String;Ljava/lang/String;I)Ljava/lang/String;");
 
     registerCallbacks(&call_tun_interface_protect_impl,
                       &call_tun_interface_resolve_process_impl,
