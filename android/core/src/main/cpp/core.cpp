@@ -5,14 +5,14 @@
 
 extern "C"
 JNIEXPORT void JNICALL
-Java_com_follow_clash_core_Core_startTun(JNIEnv *env, jobject thiz, const jint fd, jobject cb) {
+Java_com_follow_clash_core_Core_startTun(JNIEnv *env, jobject, const jint fd, jobject cb) {
     const auto interface = new_global(cb);
     startTUN(fd, interface);
 }
 
 extern "C"
 JNIEXPORT void JNICALL
-Java_com_follow_clash_core_Core_stopTun(JNIEnv *env, jobject thiz) {
+Java_com_follow_clash_core_Core_stopTun(JNIEnv *) {
     stopTun();
 }
 
@@ -50,7 +50,7 @@ call_tun_interface_resolve_process_impl(void *tun_interface, int protocol,
 
 extern "C"
 JNIEXPORT jint JNICALL
-JNI_OnLoad(JavaVM *vm, void *reserved) {
+JNI_OnLoad(JavaVM *vm, void *) {
     JNIEnv *env = nullptr;
     if (vm->GetEnv(reinterpret_cast<void **>(&env), JNI_VERSION_1_6) != JNI_OK) {
         return JNI_ERR;
