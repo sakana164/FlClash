@@ -53,6 +53,7 @@ func handleStartListener() bool {
 	defer runLock.Unlock()
 	isRunning = true
 	updateListeners(true)
+	closeConnections()
 	return true
 }
 
