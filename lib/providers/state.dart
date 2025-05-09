@@ -230,8 +230,11 @@ ProxiesListSelectorState proxiesListSelectorState(Ref ref) {
   final proxiesStyle = ref.watch(proxiesStyleSettingProvider);
   final sortNum = ref.watch(sortNumProvider);
   final columns = ref.watch(getProxiesColumnsProvider);
-  final query =
-      ref.watch(proxiesQueryProvider.select((state) => state.toLowerCase()));
+  final query = ref.watch(
+    proxiesQueryProvider.select(
+      (state) => state.toLowerCase(),
+    ),
+  );
   return ProxiesListSelectorState(
     groupNames: groupNames,
     currentUnfoldSet: currentUnfoldSet,
@@ -289,7 +292,7 @@ ProxyGroupSelectorState proxyGroupSelectorState(Ref ref, String groupName) {
   final query =
       ref.watch(proxiesQueryProvider.select((state) => state.toLowerCase()));
   final proxies = group?.all.where((item) {
-        return item.name.contains(query);
+        return item.name.toLowerCase().contains(query);
       }).toList() ??
       [];
   return ProxyGroupSelectorState(

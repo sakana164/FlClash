@@ -152,57 +152,59 @@ class _EditorPageState extends ConsumerState<EditorPage> {
             ),
           ),
         ],
-        body: CodeEditor(
-          findController: _findController,
-          maxLengthSingleLineRendering: 200,
-          findBuilder: (context, controller, readOnly) => FindPanel(
-            controller: controller,
-            readOnly: readOnly,
-            isMobileView: isMobileView,
-          ),
-          padding: EdgeInsets.only(
-            right: 16,
-          ),
-          focusNode: _focusNode,
-          scrollbarBuilder: (context, child, details) {
-            return CommonScrollBar(
-              controller: details.controller,
-              child: child,
-            );
-          },
-          toolbarController: ContextMenuControllerImpl(),
-          indicatorBuilder: (
-            context,
-            editingController,
-            chunkController,
-            notifier,
-          ) {
-            return Row(
-              children: [
-                DefaultCodeLineNumber(
-                  controller: editingController,
-                  notifier: notifier,
-                ),
-                DefaultCodeChunkIndicator(
-                  width: 20,
-                  controller: chunkController,
-                  notifier: notifier,
-                )
-              ],
-            );
-          },
-          shortcutsActivatorsBuilder: DefaultCodeShortcutsActivatorsBuilder(),
-          controller: _controller,
-          style: CodeEditorStyle(
-            fontSize: context.textTheme.bodyLarge?.fontSize?.ap,
-            fontFamily: FontFamily.jetBrainsMono.value,
-            codeTheme: CodeHighlightTheme(
-              languages: {
-                'yaml': CodeHighlightThemeMode(
-                  mode: langYaml,
-                )
-              },
-              theme: atomOneLightTheme,
+        body: SafeArea(
+          child: CodeEditor(
+            findController: _findController,
+            maxLengthSingleLineRendering: 200,
+            findBuilder: (context, controller, readOnly) => FindPanel(
+              controller: controller,
+              readOnly: readOnly,
+              isMobileView: isMobileView,
+            ),
+            padding: EdgeInsets.only(
+              right: 16,
+            ),
+            focusNode: _focusNode,
+            scrollbarBuilder: (context, child, details) {
+              return CommonScrollBar(
+                controller: details.controller,
+                child: child,
+              );
+            },
+            toolbarController: ContextMenuControllerImpl(),
+            indicatorBuilder: (
+              context,
+              editingController,
+              chunkController,
+              notifier,
+            ) {
+              return Row(
+                children: [
+                  DefaultCodeLineNumber(
+                    controller: editingController,
+                    notifier: notifier,
+                  ),
+                  DefaultCodeChunkIndicator(
+                    width: 20,
+                    controller: chunkController,
+                    notifier: notifier,
+                  )
+                ],
+              );
+            },
+            shortcutsActivatorsBuilder: DefaultCodeShortcutsActivatorsBuilder(),
+            controller: _controller,
+            style: CodeEditorStyle(
+              fontSize: context.textTheme.bodyLarge?.fontSize?.ap,
+              fontFamily: FontFamily.jetBrainsMono.value,
+              codeTheme: CodeHighlightTheme(
+                languages: {
+                  'yaml': CodeHighlightThemeMode(
+                    mode: langYaml,
+                  )
+                },
+                theme: atomOneLightTheme,
+              ),
             ),
           ),
         ),

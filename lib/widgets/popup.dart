@@ -103,11 +103,13 @@ typedef PopupOpen = Function({
 class CommonPopupBox extends StatefulWidget {
   final Widget Function(PopupOpen open) targetBuilder;
   final Widget popup;
+  final Align? align;
 
   const CommonPopupBox({
     super.key,
     required this.targetBuilder,
     required this.popup,
+    this.align,
   });
 
   @override
@@ -146,7 +148,10 @@ class _CommonPopupBoxState extends State<CommonPopupBox> {
     final viewPadding = MediaQuery.of(context).viewPadding;
     _targetOffsetValueNotifier.value = renderBox
         .localToGlobal(
-          Offset.zero.translate(viewPadding.right, viewPadding.top),
+          Offset.zero.translate(
+            viewPadding.right,
+            viewPadding.top,
+          ),
         )
         .translate(
           _offset.dx,
