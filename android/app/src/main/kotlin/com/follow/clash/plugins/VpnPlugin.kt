@@ -203,7 +203,7 @@ data object VpnPlugin : FlutterPlugin, MethodChannel.MethodCallHandler {
 
     suspend fun getStatus(): Boolean? {
         return withContext(Dispatchers.Default) {
-            flutterMethodChannel.awaitResult<Boolean>("getStatus", null)
+            flutterMethodChannel.awaitResult<Boolean>("status", null)
         }
     }
 
