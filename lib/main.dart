@@ -21,6 +21,12 @@ import 'common/common.dart';
 Future<void> main() async {
   globalState.isService = false;
   WidgetsFlutterBinding.ensureInitialized();
+  commonPrint.log(await javascript.evaluate("""
+     function text(){
+        return "hello"
+     }
+     text();
+  """));
   final version = await system.version;
   await clashCore.preload();
   await globalState.initApp(version);

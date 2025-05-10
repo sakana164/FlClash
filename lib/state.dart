@@ -1,4 +1,5 @@
 import 'dart:async';
+
 import 'package:animations/animations.dart';
 import 'package:dio/dio.dart';
 import 'package:dynamic_color/dynamic_color.dart';
@@ -40,10 +41,18 @@ class GlobalState {
   DateTime? startTime;
   UpdateTasks tasks = [];
   final navigatorKey = GlobalKey<NavigatorState>();
-  late AppController appController;
+  AppController? _appController;
   GlobalKey<CommonScaffoldState> homeScaffoldKey = GlobalKey();
+  bool isInit = false;
 
   bool get isStart => startTime != null && startTime!.isBeforeNow;
+
+  AppController get appController => _appController!;
+
+  set appController(AppController appController) {
+    _appController = appController;
+    isInit = true;
+  }
 
   GlobalState._internal();
 
