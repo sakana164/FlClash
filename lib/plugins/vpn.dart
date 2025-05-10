@@ -28,7 +28,7 @@ class Vpn {
           }
           return "";
         case "status":
-          return await clashLib?.getRunTime() != null;
+          return clashLibHandler?.getRunTime() != null;
         default:
           for (final VpnListener listener in _listeners) {
             switch (call.method) {

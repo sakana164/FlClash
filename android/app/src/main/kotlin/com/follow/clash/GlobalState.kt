@@ -10,6 +10,7 @@ import io.flutter.embedding.engine.dart.DartExecutor
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import java.util.concurrent.locks.ReentrantLock
 import kotlin.concurrent.withLock
 
@@ -39,7 +40,9 @@ object GlobalState {
     fun syncStatus() {
         CoroutineScope(Dispatchers.Default).launch {
             val status = getCurrentVPNPlugin()?.getStatus() ?: false
-            runState.value = if (status) RunState.START else RunState.STOP
+            withContext(Dispatchers.Main){
+                runState.value = if (status) RunState.START else RunState.STOP
+            }
         }
     }
 
