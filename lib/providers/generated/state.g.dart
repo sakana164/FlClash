@@ -292,7 +292,7 @@ final groupNamesStateProvider = AutoDisposeProvider<GroupNamesState>.internal(
 // ignore: unused_element
 typedef GroupNamesStateRef = AutoDisposeProviderRef<GroupNamesState>;
 String _$proxyGroupSelectorStateHash() =>
-    r'50940ff452859b02af0095cb7c4bcda813847645';
+    r'27d42af16ed77f2d22017edbb34ab60f45566be3';
 
 /// Copied from Dart SDK
 class _SystemHash {
